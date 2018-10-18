@@ -10,7 +10,7 @@ public class Jumper extends Sprite {
     public Vector2 v2Loc, v2Vel, v2Acc;
     Vector2 v2CurrentPos, v2Gravity;
     float fmaxHeight;
-    boolean canJump, isAirborn;
+    boolean canJump, isAirborn, isGrounded;
 
     public Jumper(Texture tx, float _fX, float _fY) {
         super(tx);
@@ -19,6 +19,7 @@ public class Jumper extends Sprite {
         v2Acc = new Vector2(0, 0);
         v2CurrentPos = new Vector2(v2Loc);
         v2Gravity = new Vector2(0,-1);
+        isGrounded = false;
         canJump = false;
         isAirborn = false;
         v2CurrentPos.equals(v2Loc);
@@ -62,17 +63,19 @@ public class Jumper extends Sprite {
             v2CurrentPos.equals(v2Loc);
             fmaxHeight = v2CurrentPos.y + 100;
             isAirborn = true;
+            isGrounded = false;
 
         }
-        if (canJump == true) {
+        if (canJump) {
 
             if (Gdx.input.isKeyPressed(Input.Keys.W)) {
                 if (v2Loc.y < fmaxHeight)
                     v2Acc.y = 10;
 
+
             }
 
-            if (!Gdx.input.isKeyPressed(Input.Keys.W) && isAirborn == true){
+            if (!Gdx.input.isKeyPressed(Input.Keys.W) && isAirborn){
                 canJump = false;
             }
 

@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import nrj.platformer.Objects.Background;
 import nrj.platformer.Objects.Ground;
 import nrj.platformer.Objects.Jumper;
+import nrj.platformer.Objects.Platform;
 
 public class GamMenu extends ApplicationAdapter {
 	//Extras
@@ -24,6 +25,7 @@ public class GamMenu extends ApplicationAdapter {
 	OrthographicCamera oc = new OrthographicCamera();
 	//Floor
 	Ground grndFloor;
+	Platform ptPlatform, ptPlatform2;
 	//Vectors
 	Vector2 v2Gravity, v2Normal;
 
@@ -42,6 +44,8 @@ public class GamMenu extends ApplicationAdapter {
 		jmpHero = new Jumper(txJumper, 200,100);
 		//Floor
 		grndFloor = new Ground(txFloor);
+		ptPlatform = new Platform(txFloor, 100,150,100,30);
+		ptPlatform2 = new Platform(txFloor, 300,250,100,30);
 		//Vector
 		v2Gravity = new Vector2(0,-1);
 		v2Normal = new Vector2(0,1);
@@ -55,9 +59,13 @@ public class GamMenu extends ApplicationAdapter {
 		bgCity.draw(batch);
 		grndFloor.draw(batch);
 		jmpHero.draw(batch);
+		ptPlatform.draw(batch);
+		ptPlatform2.draw(batch);
 		batch.end();
 		grndFloor.floor(jmpHero);
 		jmpHero.Update();
+		ptPlatform.hold(jmpHero);
+		ptPlatform2.hold(jmpHero);
 
 	}
 	

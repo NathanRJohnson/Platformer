@@ -15,7 +15,6 @@ public class Ground extends Sprite {
         setSize(700,100);
         setPosition(0,-50);
         rctGround = new Rectangle(getBoundingRectangle());
-         nState = 0;
     }
 
     public void floor(Jumper j)
@@ -25,23 +24,24 @@ public class Ground extends Sprite {
                 j.v2Loc.y = 45;
                 j.canJump = true;
                 j.isAirborn = false;
+                j.isGrounded = true;
                 if (j.v2Acc.y != 0) {
                     j.v2Acc.setZero();
 
                 }
          //   }
             //System.out.println("can i get uhh");
-        } else if (j.getBoundingRectangle().overlaps(rctGround) && Gdx.input.isKeyPressed((Input.Keys.W)) && j.isAirborn == true ) {
+        } else if (j.getBoundingRectangle().overlaps(rctGround) && Gdx.input.isKeyPressed((Input.Keys.W)) && j.isAirborn) {
             j.v2Loc.y = 45;
             j.canJump = true;
             j.isAirborn = false;
+            j.isGrounded = true;
             if (j.v2Acc.y != 0) {
                 j.v2Acc.setZero();
 
             }
-        } else {
+        } else if (!j.isGrounded){
             j.isAirborn = true;
         }
-
     }
 }
